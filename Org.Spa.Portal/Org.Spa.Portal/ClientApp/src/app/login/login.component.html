@@ -1,0 +1,87 @@
+<div class="form">
+  <mat-card>
+    <mat-card-header class="head">
+      <h1 class="login">Login page</h1>
+    </mat-card-header>
+
+    <br />
+    <br />
+
+    <mat-card-content>
+      <form class="example-form"
+            [formGroup]="loginForm"
+            (ngSubmit)="onSubmit()"
+            autocomplete="on">
+        <table class="example-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <mat-label> <mat-icon>person</mat-icon>User name</mat-label>
+                <input matInput
+                       type="text"
+                       formControlName="userName"
+                       class="form-control"
+                       [ngClass]="{ 'is-invalid': submitted && f.userName.errors }" />
+                <div *ngIf="submitted && f.userName.errors"
+                     class="invalid-feedback">
+                  <div *ngIf="f.userName.errors.required">
+                    UserName is required
+                  </div>
+                </div>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <mat-label> <mat-icon>lock</mat-icon>password</mat-label>
+                <input matInput
+                       [type]="hide ? 'password' : 'text'"
+                       formControlName="password"
+                       class="form-control"
+                       [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                <div *ngIf="submitted && f.password.errors"
+                     class="invalid-feedback">
+                  <div *ngIf="f.password.errors.required">
+                    Password is required
+                  </div>
+                  <div *ngIf="f.password.errors.minlength">
+                    Password must be atleast 6 characters
+                  </div>
+                </div>
+
+                <button mat-icon-button
+                        matSuffix
+                        (click)="hide = !hide"
+                        [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                  <mat-icon>
+                    {{
+                    hide ? "visibility_off" : "visibility"
+                    }}
+                  </mat-icon>
+                </button>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </mat-card-content>
+    <mat-card-actions class="button">
+      <button mat-raised-button
+              color="primary"
+              class="btn btn-primary mr-1"
+              type="submit"
+              (click)="onSubmit()">
+        Login
+      </button>
+      <button mat-raised-button
+              color="warn"
+              class="btn btn-secondary"
+              type="reset"
+              (click)="onReset()">
+        Cancel
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
